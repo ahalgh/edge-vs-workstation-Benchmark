@@ -1,0 +1,40 @@
+system:
+  name: "unknown"
+  cost_usd: 0
+  tdp_watts: 0
+
+benchmarks:
+  warmup_iterations: 5
+  benchmark_iterations: 50
+  seed: 42
+
+llm:
+  backend: "vllm"
+  models:
+    - "meta-llama/Llama-3.1-8B"
+    - "mistralai/Mistral-7B-v0.3"
+    - "Qwen/Qwen2-7B"
+  batch_sizes: [1, 4, 8]
+  max_tokens: 128
+  quantization: null
+
+vision:
+  models: ["yolov8n", "clip", "sam"]
+  input_resolution: [640, 640]
+  batch_sizes: [1, 4, 8, 16]
+
+gemm:
+  dtypes: ["float16", "float32"]
+  matrix_sizes: [1024, 2048, 4096, 8192]
+
+bandwidth:
+  sizes_mb: [1, 10, 100, 500, 1000]
+  iterations: 100
+
+power:
+  sampling_interval_ms: 100
+  settling_time_s: 2
+
+output:
+  results_dir: "results"
+  plots_dir: "plots"
